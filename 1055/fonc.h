@@ -1,8 +1,8 @@
-#define LifeSizeX 30 
-#define LifeSizeY 30 
+#define LifeSizeX 30
+#define LifeSizeY 30
 #define NBLIVES 150 
 #define Alive '*' 
-#define Dead ' ' 
+#define Dead '-' 
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,21 +24,7 @@ void displayGen(char*life, int sizeX, int sizeY);
 
 
 // countNeighbours dénombre les êtres en vie autour de la postion (posX, posY) dans le tableau Life (une génération)
-int countNeighbours(char*life, int sizeX, int sizeY, int posX, int posY){
-    int nbvoisins = 0;
-    for (int i = (posX-1); i < (posX+1); i++)
-    {
-        for (int j = (posY-1); i < (posY+1); i++)
-        {
-            if ((life[i*LifeSizeX+j] != "0") && ( (i != posX) || (j != posY) ) ){
-                nbvoisins++;
-            }
-
-        }
-        
-    }
-    
-};
+int countNeighbours(char*life, int sizeX, int sizeY, int posX, int posY);
 
 
 // Détermine s'il y a une naissance ou une disparition en fonction du nombre de voisins et de l'état actuel
