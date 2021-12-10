@@ -119,6 +119,7 @@ int main() {
         nextGen(Gen1,Gen2,LifeSizeX,LifeSizeY);
         Gen1 = Gen2;
         displayGen(Gen1,LifeSizeX,LifeSizeY);
+        sleep(1);
     }
 
     return 0;
