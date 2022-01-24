@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
-#define TAILLE 10
+#define TAILLE 10000
 
 void swap(int *xp, int *yp)
 {
@@ -53,7 +53,7 @@ int tri_naif(char type){
         }
     }
     // affichage(tab);
-    return (printf("Comparaison : %d, Permutation: %d\navec n = %d, et n2= %d",comp,permu,(permu*2),(permu*2)*(permu*2)));
+    return (printf("Comparaison : %d, Permutation: %d\navec n = %d, et n2= %d\n",comp,permu,(permu*2),(permu*2)*(permu*2)));
 }
 int tri_bulle(char type){    
     int tab[TAILLE];
@@ -94,7 +94,7 @@ int tri_bulle(char type){
             break;
     }
     // affichage(tab);
-    return (printf("Comparaison : %d, Permutation: %d\navec n = %d, et n2= %d",comp,permu,(permu*2),(permu*2)*(permu*2)));
+    return (printf("Comparaison : %d, Permutation: %d\navec n = %d, et n2= %d\n",comp,permu,(permu*2),(permu*2)*(permu*2)));
 }
 
 int main(){
@@ -102,11 +102,10 @@ int main(){
     printf("Nbr d'iterations \n");
 
     // tri avec un tableau:  a = aleatoire, c = croissant, d = decroissant
-    char type = "c";
+    char type = "a";
 
 
     //https://openclassrooms.com/forum/sujet/calcul-temps-execution-84649
-    // Mais ne fonctionne pas... (0 presque tous le temps)
     int time1 = 0;
     printf("Naif: \n");
     tri_naif(type);
