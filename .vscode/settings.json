@@ -2,7 +2,8 @@
     "files.associations": {
         "*.html": "html",
         "stdlib.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdbool.h": "c"
     },
     "editor.tokenColorCustomizations": {
         "textMateRules": [
