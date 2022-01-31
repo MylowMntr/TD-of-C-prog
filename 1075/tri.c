@@ -76,7 +76,7 @@ int tri_bulle(char type){
         {
             tab[i] = taille-i;
         }
-
+    // affichage(tab);
     // Nombre d'iteration
     int comp = 0;
     long long permu = 0;

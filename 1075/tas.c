@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
-#define taille 10000
+#define taille 10
 
 void swap(int *xp, int *yp)
 {
@@ -20,23 +20,27 @@ void affichage(int tab[]){
 
 // https://isen.junia.ovh/cir1/slides.html?presentation=algo/tris/tri_par_tas#11
 int insert(int tab[], int pos){
-    int currentNode;
+    int currentNode,tmp;
     int father;
     currentNode = pos;
     father = (currentNode-1)/2;
     while ((currentNode > 0) && (tab[currentNode] > tab[father])){
-        swap(tab[currentNode], tab[father]);
+            tmp = tab[currentNode];
+            tab[currentNode] = tab[father];
+            tab[father] = tmp;
         currentNode = father;
         father = (currentNode -1)/2;
     }
 }
 
-int remove(int tab[], int pos){
-    int currentChild, leftChild, rightChild, maxChild;
+int remo(int tab[], int pos){
+    int tmp,currentChild, leftChild, rightChild, maxChild;
     bool stop;
     currentChild = 0;
     stop = false;
-    swap (tab[0],tab[pos]);
+    tmp = tab[0];
+    tab[0] = tab[pos];
+    tab[pos] = tmp;
     leftChild = 2*currentChild + 1;
     rightChild = 2*currentChild + 2;
     while ((!stop) && ((leftChild) <= (pos - 1)))
@@ -49,7 +53,9 @@ int remove(int tab[], int pos){
         }
         if (tab[currentChild < tab[maxChild]])
         {
-            swap(tab[currentChild], tab[maxChild]);
+            tmp = tab[currentChild];
+            tab[currentChild] = tab[maxChild];
+            tab[maxChild] = tmp;
             currentChild = maxChild;
             leftChild = 2*currentChild + 1;
             rightChild = 2*currentChild + 2;
@@ -81,14 +87,16 @@ int tri_tas(char type){
         {
             tab[i] = taille-i;
         }
+    affichage(tab);
     for (int i = 0; i < (taille - 1); i++)
     {
         insert(tab,i);
     }
     for (int i = 0; i < (taille - 1); i++)
     {
-        remove(tab,(taille-1-i));
+        remo(tab,(taille-1-i));
     }
+    affichage(tab);
 }
 
 int main(){
@@ -96,15 +104,15 @@ int main(){
     printf("Nbr d'iterations \n");
 
     // tri avec un tableau:  a = aleatoire, c = croissant, d = decroissant
-    char type = "a";
+    char type = "c";
 
-
-    //https://openclassrooms.com/forum/sujet/calcul-temps-execution-84649
-    int time1 = 0;
-    printf("Naif: \n");
     tri_tas(type);
-    time1 = clock();
-    printf("Temps d'execution = %d ms\n", time1);
+    //https://openclassrooms.com/forum/sujet/calcul-temps-execution-84649
+    // int time1 = 0;
+    // printf("Naif: \n");
+    // tri_tas(type);
+    // time1 = clock();
+    // printf("Temps d'execution = %d ms\n", time1);
     
     return 0;
 }
