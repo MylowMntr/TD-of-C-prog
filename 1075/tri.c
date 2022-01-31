@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
-#define TAILLE 10000
+#define taille 10000
 
 void swap(int *xp, int *yp)
 {
@@ -12,36 +12,37 @@ void swap(int *xp, int *yp)
     *yp = temp;
 }
 void affichage(int tab[]){
-    for( int i = 0; i < TAILLE; i++){
+    for( int i = 0; i < taille; i++){
 		printf("%d-",tab[i]);
 	}
     printf("\n");
 }
 
 int tri_naif(char type){
-    int tab[TAILLE];
+    int tab[taille];
     if (type == "a")
         // Création d'un tableau de valeur aléatoire
-        for( int i = 0; i < TAILLE; i++){
+        for( int i = 0; i < taille; i++){
             tab[i] = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)1000 - (double)0)) + 0;
         }
     if (type == "c")
         // Création d'un tableau de valeur ordonné croissant
-        for (int i = 0; i < TAILLE; i++)
+        for (int i = 0; i < taille; i++)
         {
             tab[i] = i;
         }
     if (type == "d")
         // Création d'un tableau de valeur ordonné décroissant
-        for (int i = 0; i < TAILLE; i++)
+        for (int i = 0; i < taille; i++)
         {
-            tab[i] = TAILLE-i;
+            tab[i] = taille-i;
         }
     
     // Nombre d'iteration
-    int comp,permu = 0;
+    int comp = 0;
+    long long permu = 0;
     // affichage(tab);
-    for (int j = TAILLE-1; j >= 1; j--)
+    for (int j = taille-1; j >= 1; j--)
     {   
         for (int i = 0; i <= j-1; i++)
         {   
@@ -53,32 +54,34 @@ int tri_naif(char type){
         }
     }
     // affichage(tab);
-    return (printf("Comparaison : %d, Permutation: %d\navec n = %d, et n2= %d\n",comp,permu,(permu*2),(permu*2)*(permu*2)));
+    (printf("Comparaison : %d, Permutation: %d\navec n = %d, et n2= %d\n",comp,permu, taille, taille^2));
+    return 0;
 }
 int tri_bulle(char type){    
-    int tab[TAILLE];
+    int tab[taille];
     if (type == "a")
         // Création d'un tableau de valeur aléatoire
-        for( int i = 0; i < TAILLE; i++){
+        for( int i = 0; i < taille; i++){
             tab[i] = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)1000 - (double)0)) + 0;
         }
     if (type == "c")
         // Création d'un tableau de valeur ordonné croissant
-        for (int i = 0; i < TAILLE; i++)
+        for (int i = 0; i < taille; i++)
         {
             tab[i] = i;
         }
     if (type == "d")
         // Création d'un tableau de valeur ordonné décroissant
-        for (int i = 0; i < TAILLE; i++)
+        for (int i = 0; i < taille; i++)
         {
-            tab[i] = TAILLE-i;
+            tab[i] = taille-i;
         }
 
     // Nombre d'iteration
-    int comp,permu = 0;
+    int comp = 0;
+    long long permu = 0;
     // affichage(tab);
-    for (int j = TAILLE-1; j >= 1; j--)
+    for (int j = taille-1; j >= 1; j--)
     {   
         bool tabtri = true;
         for (int i = 0; i <= j-1; i++)
@@ -94,7 +97,7 @@ int tri_bulle(char type){
             break;
     }
     // affichage(tab);
-    return (printf("Comparaison : %d, Permutation: %d\navec n = %d, et n2= %d\n",comp,permu,(permu*2),(permu*2)*(permu*2)));
+    return (printf("Comparaison : %d, Permutation: %d\navec n = %d, et n2= %d\n",comp,permu,(taille),(taille)*(taille)));
 }
 
 int main(){

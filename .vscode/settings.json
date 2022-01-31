@@ -3,7 +3,9 @@
         "*.html": "html",
         "stdlib.h": "c",
         "stdio.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "tab.h": "c",
+        "locale.h": "c"
     },
     "editor.tokenColorCustomizations": {
         "textMateRules": [
