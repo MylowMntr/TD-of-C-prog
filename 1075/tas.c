@@ -19,21 +19,23 @@ void affichage(int tab[]){
 }
 
 // https://isen.junia.ovh/cir1/slides.html?presentation=algo/tris/tri_par_tas#11
-int insert(int tab[], int pos){
+int insert(int tab[], int pos,int*permu, int*comp){
     int currentNode,tmp;
     int father;
     currentNode = pos;
     father = (currentNode-1)/2;
     while ((currentNode > 0) && (tab[currentNode] > tab[father])){
-            tmp = tab[currentNode];
-            tab[currentNode] = tab[father];
-            tab[father] = tmp;
+        comp ++;
+        tmp = tab[currentNode];
+        tab[currentNode] = tab[father];
+        tab[father] = tmp;
+        permu ++;
         currentNode = father;
         father = (currentNode -1)/2;
     }
 }
 
-int remo(int tab[], int pos){
+int remo(int tab[], int pos, int*permu, int*comp){
     int tmp,currentChild, leftChild, rightChild, maxChild;
     bool stop;
     currentChild = 0;
@@ -41,10 +43,12 @@ int remo(int tab[], int pos){
     tmp = tab[0];
     tab[0] = tab[pos];
     tab[pos] = tmp;
+    permu++;
     leftChild = 2*currentChild + 1;
     rightChild = 2*currentChild + 2;
     while ((!stop) && ((leftChild) <= (pos - 1)))
     {
+        comp ++;
         if ((leftChild == pos - 1) || (tab[leftChild] > tab[rightChild])){
             maxChild = leftChild;
         }
@@ -56,6 +60,7 @@ int remo(int tab[], int pos){
             tmp = tab[currentChild];
             tab[currentChild] = tab[maxChild];
             tab[maxChild] = tmp;
+            permu++;
             currentChild = maxChild;
             leftChild = 2*currentChild + 1;
             rightChild = 2*currentChild + 2;
@@ -88,15 +93,19 @@ int tri_tas(char type){
             tab[i] = taille-i;
         }
     affichage(tab);
+    int *permu = 0;
+    int *comp = 0;
     for (int i = 1; i < (taille); i++)
     {
-        insert(tab,i);
+        insert(tab,i,permu,comp);
     }
     for (int i = 1; i < (taille); i++)
     {
-        remo(tab,(taille-i));
+        remo(tab,(taille-i),permu,comp);
     }
     affichage(tab);
+    printf("Conversion: %lld, Permutation: %lld, n: %lld, n2: %lld\n",comp,permu,taille,(taille*taille));
+    // affichage(tab);
 }
 
 int main(){

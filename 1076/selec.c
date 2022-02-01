@@ -20,12 +20,14 @@ void affichage(int tab[]){
 
 int tri_selec(int tab[]){
     int tmp, index;
+    int comp,permu = 0;
     for (int i = 0; i < (taille - 1); i++)
     {
         index = i;
 
         for (int j = i + 1; j < taille; j++)
         {
+            comp ++;
             if (tab[index] > tab[j])
                 index = j;
         }
@@ -34,8 +36,10 @@ int tri_selec(int tab[]){
             tmp = tab[i];
             tab[i] = tab[index];
             tab[index] = tmp;
+            permu ++;
         }
     }
+    printf("Conversion: %lld, Permutation: %lld, n: %lld, n2: %lld\n",comp,permu,taille,(taille*taille));
     return 0;
 }
 

@@ -39,18 +39,24 @@ int dicho(int tab[],int i, int j, int X){
 
 int tri_insert(int tab[]){
     int tmp;
+    int permu = 0;
+    int comp = 0;
     for (int i = 1; i < taille; i++)
     {
         for (int j = 0; j < taille -1; j++)
         {        
+            comp ++;
             if (tab[i]< tab[i-1]){
                 int k = dicho(tab,0,i-1,tab[i]);
                 tmp = tab[i];
                 tab[i] = tab[k];
                 tab[k] = tmp;
+                permu ++;
             }
         }
     }
+    printf("Conversion: %lld, Permutation: %lld, n: %lld, n2: %lld\n",comp,permu,taille,(taille*taille));
+    return 0;
     
 }
 

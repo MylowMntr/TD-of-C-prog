@@ -22,19 +22,21 @@ void affichage(int tab[])
 
 int tri_insert(int tab[]){
     int j,tmp;
+    int comp,permu = 0;
     for (int i = 1; i <= taille - 1; i++)
     {
         j = i;
-
+        comp ++;
         while (j > 0 && tab[j - 1] > tab[j])
         {
             tmp = tab[j];
             tab[j] = tab[j - 1];
             tab[j - 1] = tmp;
-
+            permu ++;
             j--;
         }
     }
+    printf("Conversion: %lld, Permutation: %lld, n: %lld, n2: %lld\n",comp,permu,taille,(taille*taille));
 }
 
 int main(){
