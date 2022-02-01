@@ -45,7 +45,7 @@ int remo(int tab[], int pos){
     rightChild = 2*currentChild + 2;
     while ((!stop) && ((leftChild) <= (pos - 1)))
     {
-        if ((leftChild = pos - 1) || (tab[leftChild] > tab[rightChild])){
+        if ((leftChild == pos - 1) || (tab[leftChild] > tab[rightChild])){
             maxChild = leftChild;
         }
         else{
@@ -70,31 +70,31 @@ int remo(int tab[], int pos){
 
 int tri_tas(char type){
     int tab[taille];
-    if (type == "a")
+    if (type == 'a')
         // Création d'un tableau de valeur aléatoire
         for( int i = 0; i < taille; i++){
             tab[i] = (int)((double)rand() / ((double)RAND_MAX + 1) * ((double)1000 - (double)0)) + 0;
         }
-    if (type == "c")
+    if (type == 'c')
         // Création d'un tableau de valeur ordonné croissant
         for (int i = 0; i < taille; i++)
         {
             tab[i] = i;
         }
-    if (type == "d")
+    if (type == 'd')
         // Création d'un tableau de valeur ordonné décroissant
         for (int i = 0; i < taille; i++)
         {
             tab[i] = taille-i;
         }
     affichage(tab);
-    for (int i = 0; i < (taille - 1); i++)
+    for (int i = 1; i < (taille); i++)
     {
         insert(tab,i);
     }
-    for (int i = 0; i < (taille - 1); i++)
+    for (int i = 1; i < (taille); i++)
     {
-        remo(tab,(taille-1-i));
+        remo(tab,(taille-i));
     }
     affichage(tab);
 }
@@ -104,15 +104,14 @@ int main(){
     printf("Nbr d'iterations \n");
 
     // tri avec un tableau:  a = aleatoire, c = croissant, d = decroissant
-    char type = "c";
+    char type = 'a';
 
-    tri_tas(type);
     //https://openclassrooms.com/forum/sujet/calcul-temps-execution-84649
-    // int time1 = 0;
-    // printf("Naif: \n");
-    // tri_tas(type);
-    // time1 = clock();
-    // printf("Temps d'execution = %d ms\n", time1);
-    
+    int time1 = 0;
+    printf("Tri par tas: \n");
+    tri_tas(type);
+    time1 = clock();
+    printf("Temps d'execution = %d ms\n", time1);
+
     return 0;
 }

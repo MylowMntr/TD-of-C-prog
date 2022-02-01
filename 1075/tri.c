@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
-#define taille 10000
+#define taille 10
 
 void swap(int *xp, int *yp)
 {

@@ -11,36 +11,51 @@ void swap(int *xp, int *yp)
     *xp = *yp;
     *yp = tmp;
 }
-void affichage(int tab[]){
-    for( int i = 0; i < taille; i++){
-		printf("%d-",tab[i]);
-	}
+void affichage(int tab[])
+{
+    for (int i = 0; i < taille; i++)
+    {
+        printf("%d-", tab[i]);
+    }
     printf("\n");
 }
 
-int tri_selec(int tab[]){
-    int tmp, index;
-    for (int i = 0; i < (taille - 1); i++)
-    {
-        index = i;
-
-        for (int j = i + 1; j < taille; j++)
-        {
-            if (tab[index] > tab[j])
-                index = j;
+int dicho(int tab[],int i, int j, int X){
+    if (X > tab[j]){
+        return j+1;
+    }
+    while (i!=j){
+        int k = (i+j) / 2;
+        if (X<=tab[k]){
+            j=k;
         }
-        if (index != i)
-        {   
-            tmp = tab[i];
-            tab[i] = tab[index];
-            tab[index] = tmp;
+        else{
+            i = k+1;
         }
     }
-    return 0;
+    return i;
 }
 
 
-int main(){
+int tri_insert(int tab[]){
+    int tmp;
+    for (int i = 1; i < taille; i++)
+    {
+        for (int j = 0; j < taille -1; j++)
+        {        
+            if (tab[i]< tab[i-1]){
+                int k = dicho(tab,0,i-1,tab[i]);
+                tmp = tab[i];
+                tab[i] = tab[k];
+                tab[k] = tmp;
+            }
+        }
+    }
+    
+}
+
+int main(){    
+    srand((unsigned)time(NULL));
     int tab[taille];
     char type = 'a';
     if (type == 'a'){
@@ -53,7 +68,7 @@ int main(){
         // Création d'un tableau de valeur ordonné croissant
         for (int i = 0; i < taille; i++)
         {
-            tab[i] = i;
+            tab[i] = i; 
         }
     if (type == 'd')
         // Création d'un tableau de valeur ordonné décroissant
@@ -63,7 +78,7 @@ int main(){
         }
     affichage(tab);
 
-    tri_selec(tab);
+    tri_insert(tab);
 
     affichage(tab);
 

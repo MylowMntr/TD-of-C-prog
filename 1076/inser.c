@@ -11,34 +11,31 @@ void swap(int *xp, int *yp)
     *xp = *yp;
     *yp = tmp;
 }
-void affichage(int tab[]){
-    for( int i = 0; i < taille; i++){
-		printf("%d-",tab[i]);
-	}
+void affichage(int tab[])
+{
+    for (int i = 0; i < taille; i++)
+    {
+        printf("%d-", tab[i]);
+    }
     printf("\n");
 }
 
-int tri_selec(int tab[]){
-    int tmp, index;
-    for (int i = 0; i < (taille - 1); i++)
+int tri_insert(int tab[]){
+    int j,tmp;
+    for (int i = 1; i <= taille - 1; i++)
     {
-        index = i;
+        j = i;
 
-        for (int j = i + 1; j < taille; j++)
+        while (j > 0 && tab[j - 1] > tab[j])
         {
-            if (tab[index] > tab[j])
-                index = j;
-        }
-        if (index != i)
-        {   
-            tmp = tab[i];
-            tab[i] = tab[index];
-            tab[index] = tmp;
+            tmp = tab[j];
+            tab[j] = tab[j - 1];
+            tab[j - 1] = tmp;
+
+            j--;
         }
     }
-    return 0;
 }
-
 
 int main(){
     int tab[taille];
@@ -63,7 +60,7 @@ int main(){
         }
     affichage(tab);
 
-    tri_selec(tab);
+    tri_insert(tab);
 
     affichage(tab);
 
