@@ -33,6 +33,7 @@ int insert(int tab[], int pos,int*permu, int*comp){
         currentNode = father;
         father = (currentNode -1)/2;
     }
+    return tab[taille];
 }
 
 int remo(int tab[], int pos, int*permu, int*comp){
@@ -70,6 +71,7 @@ int remo(int tab[], int pos, int*permu, int*comp){
         }
         
     }
+    return tab[taille];
     
 }
 
@@ -97,14 +99,15 @@ int tri_tas(char type){
     int *comp = 0;
     for (int i = 1; i < (taille); i++)
     {
-        insert(tab,i,permu,comp);
+        tab[taille] = insert(tab,i,permu,comp);
     }
     for (int i = 1; i < (taille); i++)
     {
-        remo(tab,(taille-i),permu,comp);
+        tab[taille] = remo(tab,(taille-i),permu,comp);
     }
     affichage(tab);
-    printf("Conversion: %lld, Permutation: %lld, n: %lld, n2: %lld\n",comp,permu,taille,(taille*taille));
+    int n = taille;
+    printf("Conversion: %lld, Permutation: %lld, n: %lld, n2: %lld\n",comp,permu,n,(n*n));
     // affichage(tab);
 }
 
