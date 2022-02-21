@@ -1,5 +1,6 @@
 #include "pile.h"
 #include <stdbool.h>
+#include <string.h>
 #define STACKOVERFLOW -1
 
 // création d'une pile 
@@ -33,7 +34,7 @@ bool isStackEmpty(Stack*stack) {
 }
 
 // pousse une valeur sur la pile
-int push(Stack*stack, int value) {
+int push(Stack*stack, char value) {
     if(!isStackFull(stack)) {
         stack->tab[stack->stackNbElemts] = value;
         stack->stackNbElemts++;
@@ -45,19 +46,57 @@ int push(Stack*stack, int value) {
 }
 
 // récupère la valeur au sommet de la pile
-int pull(Stack*stack, int*value) {
+int pull(Stack*stack, char *value) {
     if(!isStackEmpty(stack)) {
-        stack->tab[stack->stackNbElemts] = 0;
+        stack->tab[stack->stackNbElemts -1] = 0;
         stack->stackNbElemts--;
         return(EXIT_SUCCESS);
     }
     return(EXIT_FAILURE);
 }
 
-int peek(Stack*stack, int*value) {
+int peek(Stack*stack, char *value) {
     if(!isStackEmpty(stack)) {
-        printf("%d", stack->tab[stack->stackNbElemts]);
-        return(EXIT_SUCCESS);
+        value = stack->tab[stack->stackNbElemts-1];
+        return(value);
     }
     return(EXIT_FAILURE);
+}
+
+
+// PARTIE 2: Palindrome
+bool isPalindrome(char *word){
+    Stack *Pile;
+    NewStack(&Pile,20);
+    int size = strlen(word);
+    for (int i = 0; i < size; i++)
+    {
+        // printf("%c", &word[i]);
+        push(Pile, word[i]);
+    }
+    if(isStackEmpty(Pile)){
+        printf("Erreur dans l'ajout du mot a la pile.\n");
+        return -1;
+    }
+
+    char *truc;
+    char lettre;
+    for (int i = 0; i < (size/2); i++)
+    {
+        lettre = peek(Pile,truc);
+        // printf("--%c   --%c\n", lettre, Pile->tab[i]);
+        if(lettre != Pile->tab[i]){
+            printf("Ce n'est pas un palindrome.");
+            return -1;
+        }
+        pull(Pile, truc);
+    }
+    printf("C'est un palindrome.");
+    return 0;   
+
+}
+
+void main(){
+    char *mot = "radar";
+    isPalindrome(mot);
 }

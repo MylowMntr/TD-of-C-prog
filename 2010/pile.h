@@ -22,6 +22,6 @@ typedef struct Stack
 void NewStack(Stack**stack, int initialStackSize);
 bool isStackFull(Stack* stack);
 bool isStackEmpty(Stack*stack);
-int push(Stack*stack, int value);
-int pull(Stack*stack, int*value);
-int peek(Stack*stack, int*value);
+int push(Stack*stack, char value);
+int pull(Stack*stack, char*value);
+int peek(Stack*stack, char*value);
