@@ -17,6 +17,7 @@ int main(){
     bool esp = false;       // test de l'espace pour debug remplacer en condition d'arret
     printf("Entrer une expression postfixee (finir par 'c'): ");
     while(esp == false){
+
         var = (char)_getch();
         printf("%c", var);
         if (var == 'c'){
@@ -29,7 +30,7 @@ int main(){
         if (var == ' '){
             var = atoi(nombre);
             push(Pile, var);
-            memset(nombre, '\0', sizeof(nombre));
+            nombre[0] = '\0';
             i=0;
         }
         else{
@@ -37,27 +38,35 @@ int main(){
             i++;
         }
     }
-    // printf("%d  %d  %c\n", Pile->tab[0], Pile->tab[1], Pile->tab[2]);
+    printf("%d  %d  %c  %d  %c\n", Pile->tab[0], Pile->tab[1], Pile->tab[2], Pile->tab[3], Pile->tab[4]);
+    char *value;
+    pull(Pile,&value);
+    printf("\n%c\n", value);
 
-    for (int i = Pile->stackNbElemts; i != 0; i--)
-    {
-        switch (Pile->tab[i]){
-        case '+':
-            printf("%d",(Pile->tab[i-2]) + (Pile->tab[i-1]));
-            break;
-        case '-':
-            printf("%d",(Pile->tab[i-2]) - Pile->tab[i-1]);
-            break;
-        case '*':
-            printf("%d",(Pile->tab[i-2]) * (Pile->tab[i-1]));
-            break;
-        case '/':
-            printf("%d",Pile->tab[i-2] / Pile->tab[i-1]);
-            break;
-        default:
-            break;
-        }
+        printf("%d  %d  %c  %d  %c\n", Pile->tab[0], Pile->tab[1], Pile->tab[2], Pile->tab[3], Pile->tab[4]);
+
+        if (Pile->tab[i] == '+' || Pile->tab[i] == '-' || Pile->tab[i] =='*' || Pile->tab[i] == '/' ){            
+            switch (Pile->tab[i]){
+            case '+':
+                Pile->tab[i-2] = (Pile->tab[i-2]) + (Pile->tab[i-1]);
+                printf("%d",Pile->tab[i-2]);
+                break;
+            case '-':
+                Pile->tab[i-2] = (Pile->tab[i-2]) - (Pile->tab[i-1]);
+                printf("%d",Pile->tab[i-2]);
+                break;
+            case '*':
+                Pile->tab[i-2] = (Pile->tab[i-2]) * (Pile->tab[i-1]);
+                printf("%d",Pile->tab[i-2]);
+                break;
+            case '/':
+                Pile->tab[i-2] = (Pile->tab[i-2]) / (Pile->tab[i-1]);
+                printf("%d",Pile->tab[i-2]);
+                break;
+            default:
+                break;
+            }
+        
     }
-    
     return 0;
 }

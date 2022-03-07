@@ -49,6 +49,7 @@ int push(Stack*stack, char value) {
 // récupère la valeur au sommet de la pile
 int pull(Stack*stack, char *value) {
     if(!isStackEmpty(stack)) {
+        value = stack->tab[stack->stackNbElemts -1];
         stack->tab[stack->stackNbElemts -1] = 0;
         stack->stackNbElemts--;
         return(EXIT_SUCCESS);
