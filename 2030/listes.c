@@ -7,7 +7,7 @@
 void InitRandLinkedList (LinkedList * liste) {
         liste->debut = NULL;
         liste->fin = NULL;
-        liste->taille = 0; 
+        liste->taille = 0;
 }
 
 /* insertion au début ET initialisation de la liste */
