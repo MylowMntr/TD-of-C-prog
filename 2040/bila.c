@@ -5,22 +5,22 @@
 
 
 DoubleLinkedList*newDoubleLinkedList(){
-    DoubleLinkedList *list;
-    list->size = 0;
-    list->head = NULL;
-    list->tail = NULL;
-    return list;
+        DoubleLinkedList *list;
+        list->size = 0;
+        list->head = NULL;
+        list->tail = NULL;
+        return list;
 }
 DoubleLinkedListElem*NewDoubleLinkedListItem(int value){
-    DoubleLinkedList *list;
-    DoubleLinkedListElem *start;
-    start->data = value;
-    start->previous = NULL;
-    
-    list->size = 1;
-    list->head = start;
-    list->tail = start;
-    return list;
+        DoubleLinkedList *list;
+        DoubleLinkedListElem *start;
+        start->data = value;
+        start->previous = NULL;
+
+        list->size = 1;
+        list->head = start;
+        list->tail = start;
+        return list;
 }
 /* affichage de la liste */
 void DisplayDoubleList (DoubleLinkedList * liste){
@@ -43,19 +43,54 @@ void RevDisplayDoubleList (DoubleLinkedList * liste){
         }
 }
 int insertItemAtDoubleLinkedListTail(DoubleLinkedList*list, DoubleLinkedListElem*newItem){
-    list->tail->next = newItem;
-    return 0; 
+        list->tail->next = newItem;
+        newItem->previous = list->tail;
+        list->tail = newItem;
+        list->size += 1;
+        return 0; 
 }
 int insertItemAtDoubleLinkedListHead(DoubleLinkedList*list, DoubleLinkedListElem*newItem){
-    list->head->previous = newItem;
-    list->head = newItem;
+        list->head->previous = newItem;
+        list->head = newItem;
+        list->size += 1;
+        return 0;
 }
-
-
-
-
 int getDoubleLinkedListSize(DoubleLinkedList*list){
-    return list->size;
+        return list->size;  
+}
+int insertItemAfterItem(DoubleLinkedList*list, DoubleLinkedListElem*item, DoubleLinkedListElem*newItem){
+        DoubleLinkedListElem *courant;
+        courant = list->head;
+        while (courant->data != item->data)
+                courant = courant->next;
+        if (courant->next == NULL)
+                return -1;
+        courant->next = item;
+        courant->next->next->previous = item;
+        list->size += 1;
+        return 0;
+}
+int insertItemBeforeItem(DoubleLinkedList*list, DoubleLinkedListElem*item, DoubleLinkedListElem*newItem){
+        DoubleLinkedListElem *courant;
+        courant = list->head;
+        while (courant->data != item->data)
+                courant = courant->next;
+        if (courant->next == NULL)
+                return -1;
+        courant->next = item;
+        courant->next->next->previous = item;
+        list->size += 1;
+        return 0;
+}
+int emptyDoubleLinkedList(DoubleLinkedList*list){
+        DoubleLinkedListElem *tmp = list->head;
+        while (tmp->data != list->tail->data){
+                tmp = tmp->next;
+                free (tmp->previous);
+        }
+        list->size = 0;
+        list->head = list->tail = NULL;
+        return 0;
 }
 /*insertion à la tail de la liste */
 int AppendNewElemToSingleLinkedList (DoubleLinkedList * liste, DoubleLinkedListElem * courant, char *data){
