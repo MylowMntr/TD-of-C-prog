@@ -1,18 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
+int main(void)
+{
 
-
-int mot(char oui[], int i){
-    if (oui[i] == '\0') {
-        printf("%d", i);
-        return(-1);
-    }
-    else {
-        mot(oui, i + 1);
-    }
-}
-
-int main() {
-    char oui[] = {'o','u','i','\0'} ;
-    mot(oui, 0);
+   int a = 10;
+   int b = 3;
+   int c = 20;
+   printf("%d", (a * ++ b));
+   return 0;
 }
